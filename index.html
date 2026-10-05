@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saldējuma Paradīze | Gardākais saldējums pilsētā</title>
+    <style>
+        /* Vispārīgie stili */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fdfaf5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Galvene */
+        header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .logo span {
+            color: #fff3e0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fff;
+            color: #e91e63;
+        }
+
+        /* Hero sadaļa */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        }
+
+        .btn {
+            display: inline-block;
+            background: #e91e63;
+            color: #fff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+        }
+
+        /* Produktu sadaļa */
+        .products {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #4a2c2c;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #4a2c2c;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+
+        .btn-small {
+            display: inline-block;
+            background: #ffb74d;
+            color: #4a2c2c;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            background: #ffa726;
+        }
+
+        /* Par mums sadaļa */
+        .about {
+            padding: 80px 0;
+            background: #fff8e1;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #4a2c2c;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Kontaktu sadaļa */
+        .contact {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .contact-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 30px;
+            background: #fdfaf5;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 10px;
+            color: #4a2c2c;
+        }
+
+        /* Kājene */
+        footer {
+            background: #4a2c2c;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsīvais dizains */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Galvene -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">🍦 Saldējuma <span>Paradīze</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#sakums">Sākums</a></li>
+                    <li><a href="#produkti">Produkti</a></li>
+                    <li><a href="#par-mums">Par mums</a></li>
+                    <li><a href="#kontakti">Kontakti</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero sadaļa -->
+    <section class="hero" id="sakums">
+        <div class="hero-content">
+            <h1>Gardākais saldējums pilsētā</h1>
+            <p>Mīksts, krēmīgs un gatavots no dabīgām sastāvdaļām</p>
+            <a href="#produkti" class="btn">Apskati produktus</a>
+        </div>
+    </section>
+
+    <!-- Produktu sadaļa -->
+    <section class="products" id="produkti">
+        <div class="container">
+            <h2 class="section-title">Mūsu populārākie saldējumi</h2>
+            <p class="section-subtitle">Izvēlies savu iecienītāko garšu no mūsu plašā klāsta</p>
+            
+            <div class="product-grid">
+                <!-- Produkts 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vanilijas saldējums">
+                    <div class="product-info">
+                        <h3>Vanilijas sapnis</h3>
+                        <p>Klasiskais vanilijas saldējums ar īstu Madagaskaras vaniliju.</p>
+                        <div class="price">2.50 €</div>
+                        <button class="btn-small">Pievienot grozam</button>
+                    </div>
+                </div>
+
+                <!-- Produkts 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1570197788417-0e82375c9371?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Šokolādes saldējums">
+                    <div class="product-info">
+                        <h3>Šokolādes ekstāze</h3>
+                        <p>Bagātīgs tumšās šokolādes saldējums ar šokolādes skaidiņām.</p>
+                        <div class="price">3.00 €</div>
+                        <button class="btn-small">Pievienot grozam</button>
+                    </div>
+                </div>
+
+                <!-- Produkts 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Zemeņu saldējums">
+                    <div class="product-info">
+                        <h3>Zemeņu bauda</h3>
+                        <p>Svaigu zemeņu saldējums ar īstiem augļu gabaliņiem.</p>
+                        <div class="price">2.80 €</div>
+                        <button class="btn-small">Pievienot grozam</button>
+                    </div>
+                </div>
+
+                <!-- Produkts 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pistāciju saldējums">
+                    <div class="product-info">
+                        <h3>Pistāciju greznība</h3>
+                        <p>Elegants pistāciju saldējums ar grauzdētiem riekstiem.</p>
+                        <div class="price">3.50 €</div>
+                        <button class="btn-small">Pievienot grozam</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Par mums sadaļa -->
+    <section class="about" id="par-mums">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2>Par mums</h2>
+                <p>Mēs esam maza, ģimenes uzņēmums, kas kopš 2010. gada gatavo gardāko saldējumu pilsētā. Mūsu receptes ir mantotas no vecmāmiņas, un mēs izmantojam tikai dabīgas sastāvdaļas.</p>
+                <p>Katrs saldējums tiek gatavots ar mīlestību, izmantojot svaigu krējumu, augļus un riekstus no vietējiem ražotājiem.</p>
+                <p>Mūsu mērķis ir iepriecināt ikvienu saldējuma cienītāju ar bagātīgu garšu un kvalitāti.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Saldējuma veikals">
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontaktu sadaļa -->
+    <section class="contact" id="kontakti">
+        <div class="container">
+            <h2 class="section-title">Kontakti</h2>
+            <p class="section-subtitle">Sazinies ar mums vai apmeklē mūsu veikalu</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="icon">📍</div>
+                    <h3>Adrese</h3>
+                    <p>Brīvības iela 42, Rīga, LV-1010</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">📞</div>
+                    <h3>Tālrunis</h3>
+                    <p>+371 20 123 456</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">✉️</div>
+                    <h3>E-pasts</h3>
+                    <p>info@saldejumaparadize.lv</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kājene -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Saldējuma Paradīze. Visas tiesības aizsargātas.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
